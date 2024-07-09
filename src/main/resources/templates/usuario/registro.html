@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>ElectroTEC</title>
+
+
+<!-- Bootstrap core CSS -->
+<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+  <link rel="icon" type="image/png" th:href="@{/images/logo-robot.png}">
+  <style>
+	   body {
+           background-image: url("/images/fonazo.png");
+            padding-top: 40px; /* Espacio superior para alinear el formulario */
+        }
+
+        .form-container {
+            background-color: #ffffff; /* Fondo blanco para el formulario */
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 30px; /* Espaciado interno */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        .form-container h2 {
+            text-align: center; /* Centro el título del formulario */
+            margin-bottom: 30px; /* Espacio inferior */
+        }
+	  
+  </style>
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" th:href="@{/}">
+				
+					<img th:src="@{/images/logito.png}" style="width: 110px; height:70px;">
+				
+			</a>
+
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" th:href="@{/usuario/login}"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-fill-gear" viewBox="0 0 16 16">
+  <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4m9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
+</svg>Login</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+<br>
+<br>
+<br>
+	 <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="form-container">
+                <h2>Registro de Usuario</h2>
+                <form th:action="@{/usuario/save}" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombre">Nombres:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingrese sus nombres" autocomplete="off">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" required placeholder="Ingrese su teléfono" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required placeholder="Ingrese su email" autocomplete="off">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="direccion">Dirección:</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required placeholder="Ingrese su dirección" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password" required placeholder="Ingrese su contraseña" autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                </form>
+                <br>
+                 <div class="text-center">
+                    <a th:href="@{/usuario/login}" class="card-link">Ya tienes Cuenta?Inicia Sesion Aqui</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	<!-- /.container -->
+
+	<!-- Footer -->
+	
+
+	<!-- Bootstrap core JavaScript -->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://unpkg.com/sweetalert2@9.5.3/dist/sweetalert2.all.min.js"></script>
+ <script th:if="${unsuccess}">
+    Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: "Ocurrio un Error al registrar el Usuario",
+        showConfirmButton: false,
+        timer: 2000
+    });
+</script>
+</body>
+
+</html>

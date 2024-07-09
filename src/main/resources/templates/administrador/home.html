@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>ElectroTEC</title>
+
+
+<!-- Bootstrap core CSS -->
+<link th:href="@{vendor/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link th:href="@{css/heroic-features.css}" rel="stylesheet">
+<link rel="icon" type="image/png" th:href="@{/images/logo-robot.png}">
+
+<style>
+	
+	.formita2{
+	
+	background-color:rgb(128, 128, 255);
+	border-radius: 5px;
+	margin: 10px 20px;	
+	padding: 14px;
+		
+}
+.formita2 h3{
+	left: 2px;
+}
+
+.formita{
+	
+	background-color:rgb(5, 0, 72);
+	border-radius: 5px;
+	margin: 15px 20px;	
+	padding: 10px;
+		
+}
+
+body{
+
+	background-image: url("/images/fonazo.png");
+	
+}
+</style>
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<div th:include="administrador/template_admin.html::header"></div>
+
+	<!-- Page Content -->
+		<br>
+		<br>
+		
+ <div class="row justify-content-end formita2">
+        <div class="col-lg-8">
+            <!-- Aquí va tu formulario de búsqueda -->
+            <form class="form-inline">
+                <div class="input-group">
+               <h3><strong>BIENVENIDO AL PANEL DEL ADMINISTRADOR</strong></h3>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<br>
+	
+<br>
+
+    <div class="row justify-content-end formita">
+        <div class="col-lg-8">
+            <!-- Aquí va tu formulario de búsqueda -->
+            <form class="form-inline" method="post" th:action="@{/administrador/searchAdmin}">
+                <div class="input-group">
+                    <input class="form-control" type="search" placeholder="Escribe un producto...." size="40" aria-label="Search" name="nombre" autocomplete="off">
+             
+                    <div class="input-group-append f">
+                        <button class="btn btn-danger" type="submit">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+		<div class="text-center" style="width: 97%; margin: 0 auto;">
+		
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarResponsive" aria-controls="navbarResponsive"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+		<!-- Page Features -->
+		<div class="row text-center">
+
+			<div class="col-lg-3 col-md-6 mb-4" th:each="producto: ${productos}">
+				<div class="card h-100">
+					<img class="card-img-top"
+						th:src="@{/images/{img} (img=${producto.imagen})} " alt="">
+					<div class="card-body">
+						<strong><p class="card-text" th:text="${producto.nombre}"></p></strong>
+					</div>
+					<div class="card-footer">
+						<a th:href="@{/administrador/productohomeAdmin/{id}  (id=${producto.id})  }" class="btn btn-success">Ver
+							producto</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+
+	<div th:include="administrador/template_admin.html::footer"></div>
+
+	<!-- Bootstrap core JavaScript -->
+	<script th:src="@{vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://unpkg.com/sweetalert2@9.5.3/dist/sweetalert2.all.min.js"></script>
+<script th:if="${success}">
+    Swal.fire({
+        icon: 'success',
+        title: 'Éxito!',
+        text: "Registro exitoso. ¡Bienvenido Administrador!",
+        showConfirmButton: true
+      
+    });
+</script>
+
+</body>
+
+</html>

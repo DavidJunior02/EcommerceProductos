@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>ElectroTEC</title>
+
+
+  <!-- Bootstrap core CSS -->
+  <link th:href="@{vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link th:href="@{css/heroic-features.css}" rel="stylesheet">
+<link rel="icon" type="image/png" th:href="@{/images/logo-robot.png}">
+
+</head>
+
+<body>
+
+ 
+
+<!-- Page Content -->
+<div style="width: 90%; margin: 0 auto;">
+
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" th:href="@{administrador}">
+				<img th:src="@{/images/logito.png}" style="width: 110px; height:70px;">
+			</a>
+
+		<div class="container">
+			
+			
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ADMIN </a>
+							
+							<div class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" th:href="@{/productos}">Productos</a> 
+								<a class="dropdown-item" th:href="@{/administrador/usuarios}">Usuarios</a>
+								<a class="dropdown-item" th:href="@{/administrador/ordenes}">Ordenes</a>
+								<a class="dropdown-item" th:href="@{/usuario/cerrar}">Salir</a>
+							</div></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+<br/>
+<br/>
+<br/>
+
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">
+    <small></small>
+  </h1>
+
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item active">Ver Productos</li>
+  </ol>
+
+  
+    <a class="btn btn-primary" th:href="@{/productos/create}">Crear Producto</a>
+     || 
+    <div th:if="${productos != null}" style="display: inline-block;">
+        <a class="btn btn-success" th:href="@{/productos/reporteProductos}">
+            <span class="glyphicon glyphicon-saved"></span> EXPORTAR EXCEL
+        </a>
+    </div>
+<div th:if="${productos == null}">
+    <p>Exportacion a Formato Excel no Disponible</p>
+</div>
+<br/>
+   <br/> 
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Inventario</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Acción</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="producto:${productos}">
+        <td th:text="${producto.nombre}"></td>
+        <td th:text="${producto.descripcion}"></td>
+        <td th:text="${producto.cantidad}"></td>
+        <td th:text="${producto.precio}"></td>
+        <td><a  class="btn btn-warning" th:href="@{productos/edit/{id} (id=${producto.id}) }">Editar</a> </td>
+        <td><a  class="btn btn-danger" th:href="@{productos/delete/{id} (id=${producto.id}) }">Eliminar</a> </td>
+      </tr>       
+    </tbody>
+  </table>
+
+</div>
+<!-- /.container -->
+
+
+ <!-- Bootstrap core JavaScript -->
+    <script th:src="@{vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+ <script src="https://unpkg.com/sweetalert2@9.5.3/dist/sweetalert2.all.min.js"></script>
+<script th:if="${successMessage}">
+    $(document).ready(function() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito!',
+            text:` [[${successMessage}]]`,
+            showConfirmButton: true
+        });
+    });
+</script>
+
+<script th:if="${errorMessage}">
+    $(document).ready(function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: `[[${errorMessage}]]`,
+            showConfirmButton: true
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    function eliminarProducto(id) {
+        $.ajax({
+            type: "GET",
+            url: "/productos/delete/" + id,
+            success: function(response) {
+                // Este bloque se ejecuta cuando la respuesta es exitosa
+                $("body").append(response);
+            },
+            error: function(xhr, status, error) {
+                // Este bloque se ejecuta cuando hay un error en la petición AJAX
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Hubo un problema al intentar eliminar el producto.',
+                    showConfirmButton: true
+                });
+            }
+        });
+    }
+</script>
+</body>
+
+</html>
